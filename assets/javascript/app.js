@@ -16,6 +16,7 @@ var questions = [{
   answers: ["Richard Nixon", "Jimmy Carter", "Ronald Reagan", "Harry Truman"],
   correctAnswer: "Ronald Reagan"
 },];
+
 // Declaring our variables
 //setting quizzBox to id quiz area allows us to select and hide after quiz
 var quizBox = $("#quiz-box");
@@ -58,7 +59,7 @@ var dudeTrivia = {
     quizBox.append("<button id='done'>I'm done, Man</button>");
   },
 
- //check our answers below 
+
  done: function () {
   $.each($("input[name='question-0']:checked"), function () {
     if ($(this).val() === questions[0].correctAnswer) {
