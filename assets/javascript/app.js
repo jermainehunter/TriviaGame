@@ -28,7 +28,7 @@ var timer;
 var dudeTrivia = {
   correct: 0,
   incorrect: 0,
-  counter: 10,
+  counter: 15,
 
   //our countdown function will count down 1 second at time
   //remember we're accessing the counter above dudeTrivia.counter
