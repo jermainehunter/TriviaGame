@@ -40,7 +40,7 @@ var dudeTrivia = {
       //run the done function if time runs out.
       //alert that time's up
       alert("Time's Up Man!");
-      dudeTrivia.finish();
+      dudeTrivia.done();
     }
   },
 
@@ -51,15 +51,15 @@ var dudeTrivia = {
     for (var i = 0; i < questions.length; i++) {
       quizBox.append("<h2>" + questions[i].question + "</h2>");
       for (var j = 0; j < questions[i].answers.length; j++) {
-        quizBox.append("<p><input type='radio' name='question-" + i +
-        "' value='" + questions[i].answers[j] + "''></p>" + questions[i].answers[j]);
+        quizBox.append("<input type='radio' name='question-" + i +
+        "' value='" + questions[i].answers[j] + "''>" + questions[i].answers[j]);
       }
     }
     quizBox.append("<button id='done'>I'm done, Man</button>");
   },
 
  //check our answers below 
- finish: function () {
+ done: function () {
   $.each($("input[name='question-0']:checked"), function () {
     if ($(this).val() === questions[0].correctAnswer) {
       dudeTrivia.correct++;
@@ -109,6 +109,6 @@ $(document).on("click", "#start", function () {
 });
 //on click method for when user finishes questions before timer runs out
 //click on done button to show answers
-$(document).on("click", "#finish", function () {
-  dudeTrivia.finish();
+$(document).on("click", "#done", function () {
+  dudeTrivia.done();
 });
