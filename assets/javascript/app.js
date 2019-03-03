@@ -60,30 +60,30 @@ var dudeTrivia = {
 
  //check our answers below 
  done: function () {
-  $("input[name='question-0']:checked"), function () {
+  $.each($("input[name='question-0']:checked"), function () {
     if ($(this).val() === questions[0].correctAnswer) {
       dudeTrivia.correct++;
     }
     else {
       dudeTrivia.incorrect++;
     }
-  };
-$("input[name='question-1']:checked"), function () {
+  });
+  $.each($("input[name='question-1']:checked"), function () {
     if ($(this).val() === questions[1].correctAnswer) {
       dudeTrivia.correct++;
     }
     else {
       dudeTrivia.incorrect++;
     }
-  })
-$("input[name='question-2']:checked"), function () {
+  });
+  $.each($("input[name='question-2']:checked"), function () {
     if ($(this).val() === questions[2].correctAnswer) {
       dudeTrivia.correct++;
     }
     else {
       dudeTrivia.incorrect++;
     }
-  };
+  });
 
 
 
