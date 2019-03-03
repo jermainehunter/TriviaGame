@@ -1,6 +1,7 @@
 
 //Added to my Bootstrap Portfolio Page: https://jermainehunter.github.io/Bootstrap-Portfolio/portfolio.html
 // Questions...as objects in an array...start with a couple
+//array of objects...
 
 var questions = [{
   question: "What was the name of the boy who stole the Dude's briefcase?",
@@ -94,9 +95,9 @@ $("input[name='question-2']:checked"), function () {
     clearInterval(timer);
     $("#questions-wrapper h2").remove();
     quizBox.html("<h2>You're done Man!</h2>");
-    quizBox.append("<h3>Far Out Answers: " + dudeTrivia.correct + "</h3>");
-    quizBox.append("<h3>Bummer Man, Answers: " + dudeTrivia.incorrect + "</h3>");
-    quizBox.append("<h3>Is this a weekday? (unanswered): " + (questions.length - (dudeTrivia.incorrect + dudeTrivia.correct)) + "</h3>");
+    quizBox.append("<h2>Far Out Answers: " + dudeTrivia.correct + "</h2>");
+    quizBox.append("<h2>Bummer Man, Answers: " + dudeTrivia.incorrect + "</h2>");
+    quizBox.append("<h2>Is this a weekday? (unanswered): " + (questions.length - (dudeTrivia.incorrect + dudeTrivia.correct)) + "</h2>");
   }
 };
 //on click method for starting trivia game
