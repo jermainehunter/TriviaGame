@@ -1,62 +1,112 @@
-// trivia questions array of objects
-//contains questions, answers, correct answer.
-var triviaQuestions = [
-  {
-    question: "1. Jeff Bridges plays the Dude. What is the Dude's real name?",
-    answerone: "The Jesus",
-    answertwo: "Jeffery Lebowski",
-    answerthree: "Maude Lebowski",
-    answerfour: "Jackie Treehorn",
-    correctanswer: 2
+
+// Questions...as objects in an array...start with a couple
+
+var questions = [{
+  question: "What was the name of the boy who stole the Dude's briefcase?",
+  answers: ["Ricky Peters", "Larry Sellers", "Knox Harrington", "Arthur Digby Sellers"],
+  correctAnswer: "Larry Sellers"
+}, {
+  question: "What kind of dog did Walter bring bowling?",
+  answers: ["Chihuahua", "Pomeranian", "Jack Russell Terrier"],
+  correctAnswer: "Pomeranian"
+}, {
+  question: "Which US President did The Real Jeffery Lebowski meet?",
+  answers: ["Richard Nixon", "Jimmy Carter", "Ronald Reagan", "Harry Truman"],
+  correctAnswer: "Ronald Reagan"
+},];
+// Declaring our variables
+//setting quizzBox to id quiz area allows us to select and hide after quiz
+var quizBox = $("#quiz-box");
+var timer;
+//Declaring our variable game to hold an object that will contain most of our functions
+// ..the first three are going to be
+//answers correct, answers incorrect and the counter set to 15 (seconds).
+
+var dudeTrivia = {
+  correct: 0,
+  incorrect: 0,
+  counter: 10,
+
+  //our countdown function will count down 1 second at time
+  //remember we're accessing the counter above dudeTrivia.counter
+  countdown: function () {
+    dudeTrivia.counter--;
+    //use jquery to put our countdown in he HTML
+    $("#counter-number").html(dudeTrivia.counter);
+    //put if statement if the game.counter reaches 0, game over
+    if (dudeTrivia.counter === 0) {
+      //run the done function if time runs out.
+      //alert that time's up
+      alert("Time's Up Man!");
+      dudeTrivia.done();
+    }
   },
-  {
-    question: "2. Quoting George H. W. Bush, the Dude defiantly stated that 'This aggression will not____.'?",
-    answerone: "Be tolerated",
-    answertwo: "Chill",
-    answerthree: "Be acceptable",
-    answerfour: "Stand",
-    correctanswer: 4
-  },
-  {
-    question: "3. What ties the Dude's room together?",
-    answerone: "A Chair",
-    answertwo: "A Table",
-    answerthree: "A Rug",
-    answerfour: "A Coffee Table",
-    correctanswer: 3
+
+  start: function() {
+    timer = setInterval(dudeTrivia.countdown, 1000);
+    $("#questions-wrapper").prepend("<h2>Your Time Left, Man: <span id='counter-number'>15</span> Seconds</h2>");
+    $("#start").remove();
+    for (var i = 0; i < questions.length; i++) {
+      quizBox.append("<h2>" + questions[i].question + "</h2>");
+      for (var j = 0; j < questions[i].answers.length; j++) {
+        quizBox.append("<input type='radio' name='question-" + i +
+        "' value='" + questions[i].answers[j] + "''>" + questions[i].answers[j]);
+      }
+    }
+    quizBox.append("<button id='done'>I'm done, Man</button>");
   },
 
-];
+ //check our answers below 
+ done: function () {
+  $("input[name='question-0']:checked"), function () {
+    if ($(this).val() === questions[0].correctAnswer) {
+      dudeTrivia.correct++;
+    }
+    else {
+      dudeTrivia.incorrect++;
+    }
+  };
+$("input[name='question-1']:checked"), function () {
+    if ($(this).val() === questions[1].correctAnswer) {
+      dudeTrivia.correct++;
+    }
+    else {
+      dudeTrivia.incorrect++;
+    }
+  })
+$("input[name='question-2']:checked"), function () {
+    if ($(this).val() === questions[2].correctAnswer) {
+      dudeTrivia.correct++;
+    }
+    else {
+      dudeTrivia.incorrect++;
+    }
+  };
 
 
-//we need to show questions and answer choices in HTML
-//question 1 
-$('#question').text(triviaQuestions[0].question);
-$('#answer_1').text(triviaQuestions[0].answerone);
-$('#answer_2').text(triviaQuestions[0].answertwo);
-$('#answer_3').text(triviaQuestions[0].answerthree);
-$('#answer_4').text(triviaQuestions[0].answerfour);
-//question 2
-$('#question_2').text(triviaQuestions[1].question);
-$('#q2answer_1').text(triviaQuestions[1].answerone);
-$('#q2answer_2').text(triviaQuestions[1].answertwo);
-$('#q2answer_3').text(triviaQuestions[1].answerthree);
-$('#q2answer_4').text(triviaQuestions[1].answerfour);
-//question 3
-$('#question_3').text(triviaQuestions[2].question);
-$('#q3answer_1').text(triviaQuestions[2].answerone);
-$('#q3answer_2').text(triviaQuestions[2].answertwo);
-$('#q3answer_3').text(triviaQuestions[2].answerthree);
-$('#q3answer_4').text(triviaQuestions[2].answerfour);
 
-
-
-
-
-
+    dudeTrivia.result();
+  },
+//the result function below, hide the questions wrapper and show the results.
+//this happens when the clock runs out or user selects done button. 
+  result: function () {
+    clearInterval(timer);
+    $("#questions-wrapper h2").remove();
+    quizBox.html("<h2>You're done Man!</h2>");
+    quizBox.append("<h3>Far Out Answers: " + dudeTrivia.correct + "</h3>");
+    quizBox.append("<h3>Bummer Man, Answers: " + dudeTrivia.incorrect + "</h3>");
+    quizBox.append("<h3>Is this a weekday? (unanswered): " + (questions.length - (dudeTrivia.incorrect + dudeTrivia.correct)) + "</h3>");
+  }
+};
+//on click method for starting trivia game
+//click on done button to show answers
+$(document).on("click", "#start", function () {
+  dudeTrivia.start();
+  $("#the-dude").css('visibility', 'visibile');
   
-
-
-//our event listeners...pay attention to this part!!
-//lots can go wrong.
-
+});
+//on click method for when user finishes questions before timer runs out
+//click on done button to show answers
+$(document).on("click", "#done", function () {
+  dudeTrivia.done();
+});
