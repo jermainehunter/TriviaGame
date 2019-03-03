@@ -2,6 +2,12 @@ html,
 body {
   height: 100%;
 }
+
+p
+{
+  font-size: 25px;
+  color: #322729;
+}
 body {
   text-align: center;
   background: #f5f1f1;
@@ -21,7 +27,7 @@ button {
   border: 1;
   border-radius: 20px;
 }
-#wrapper {
+#container {
   width: 960px;
   box-sizing: border-box;
   padding: 5% 0;
@@ -35,6 +41,7 @@ button {
 
 #sub-wrapper {
   position: relative;
+  padding-top: 50px;
 
 }
 button {
@@ -66,6 +73,7 @@ h3 {
 
 #quiz-area h2 {
   margin-top: 40px;
+  font-size: 25px;
 }
 #the-dude {
   margin: auto;

@@ -40,7 +40,7 @@ var dudeTrivia = {
       //run the done function if time runs out.
       //alert that time's up
       alert("Time's Up Man!");
-      dudeTrivia.done();
+      dudeTrivia.finish();
     }
   },
 
@@ -51,15 +51,15 @@ var dudeTrivia = {
     for (var i = 0; i < questions.length; i++) {
       quizBox.append("<h2>" + questions[i].question + "</h2>");
       for (var j = 0; j < questions[i].answers.length; j++) {
-        quizBox.append("<input type='radio' name='question-" + i +
-        "' value='" + questions[i].answers[j] + "''>" + questions[i].answers[j]);
+        quizBox.append("<p><input type='radio' name='question-" + i +
+        "' value='" + questions[i].answers[j] + "''></p>" + questions[i].answers[j]);
       }
     }
     quizBox.append("<button id='done'>I'm done, Man</button>");
   },
 
  //check our answers below 
- done: function () {
+ finish: function () {
   $.each($("input[name='question-0']:checked"), function () {
     if ($(this).val() === questions[0].correctAnswer) {
       dudeTrivia.correct++;
@@ -95,9 +95,9 @@ var dudeTrivia = {
     clearInterval(timer);
     $("#questions-wrapper h2").remove();
     quizBox.html("<h2>You're done Man!</h2>");
-    quizBox.append("<h2>Far Out Answers: " + dudeTrivia.correct + "</h2>");
-    quizBox.append("<h2>Bummer Man, Answers: " + dudeTrivia.incorrect + "</h2>");
-    quizBox.append("<h2>Is this a weekday? (unanswered): " + (questions.length - (dudeTrivia.incorrect + dudeTrivia.correct)) + "</h2>");
+    quizBox.append("<h3>Far Out! (correct answers) " + dudeTrivia.correct + "</h3>");
+    quizBox.append("<h3>Bummer Man! (incorrect answers): " + dudeTrivia.incorrect + "</h3>");
+    quizBox.append("<h3>Is this a weekday? (unanswered): " + (questions.length - (dudeTrivia.incorrect + dudeTrivia.correct)) + "</h3>");
   }
 };
 //on click method for starting trivia game
@@ -109,6 +109,6 @@ $(document).on("click", "#start", function () {
 });
 //on click method for when user finishes questions before timer runs out
 //click on done button to show answers
-$(document).on("click", "#done", function () {
-  dudeTrivia.done();
+$(document).on("click", "#finish", function () {
+  dudeTrivia.finish();
 });
